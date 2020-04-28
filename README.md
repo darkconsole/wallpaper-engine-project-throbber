@@ -2,7 +2,8 @@
 
 Templates to create music throbbing and LED blinking wallpapers with Wallpaper Engine.
 
-[![Project Throbber Demo 1](http://img.youtube.com/vi/kbeR71cW9qY/0.jpg)](http://www.youtube.com/watch?v=kbeR71cW9qY)
+[![Project Throbber Demo 1](https://j.gifs.com/ZYnJLR.gif)](https://www.youtube.com/watch?v=kbeR71cW9qY)
+
 https://www.youtube.com/watch?v=kbeR71cW9qY
 
 # Installation
