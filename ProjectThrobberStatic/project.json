@@ -1,0 +1,40 @@
+{
+	"file" : "scene.json",
+	"general" : 
+	{
+		"properties" : 
+		{
+			"leds" : 
+			{
+				"order" : 100,
+				"text" : "LEDs",
+				"type" : "color",
+				"value" : "0 0 0"
+			},
+			"schemecolor" : 
+			{
+				"order" : 101,
+				"text" : "ui_browse_properties_scheme_color",
+				"type" : "color",
+				"value" : "0.8117647058823529 0.03529411764705882 0.03529411764705882"
+			}
+		},
+		"supportsaudioprocessing" : true
+	},
+	"templateoptions" : 
+	[
+		{
+			"type": "replacetexture",
+			"name": "Background Art",
+			"description": "Select an image to import as the background art.",
+			"destination": "materials/background.png",
+			"options": []
+		},
+		{
+			"type" : "userpropertycolor",
+			"name" : "Scheme Colour",
+			"description" : "Windows Scheme Colour and Default LED Blink Colour",
+			"key" : "schemecolor"
+		}
+	]
+}

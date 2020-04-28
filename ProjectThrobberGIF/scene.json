@@ -1,0 +1,146 @@
+{
+	"camera" : 
+	{
+		"center" : "0.000 0.000 -1.000",
+		"eye" : "0.000 0.000 0.000",
+		"up" : "0.000 1.000 0.000"
+	},
+	"general" : 
+	{
+		"ambientcolor" : "0.300 0.300 0.300",
+		"bloom" : true,
+		"bloomstrength" : 2.0,
+		"bloomthreshold" : 0.93000000715255737,
+		"camerafade" : true,
+		"cameraparallax" : false,
+		"cameraparallaxamount" : 0.30000001192092896,
+		"cameraparallaxdelay" : 0.10000000149011612,
+		"cameraparallaxmouseinfluence" : 0.019999999552965164,
+		"camerapreview" : true,
+		"clearcolor" : 
+		{
+			"user" : "schemecolor",
+			"value" : "0.812 0.035 0.035"
+		},
+		"clearenabled" : true,
+		"farz" : 10000.0,
+		"fov" : 50.0,
+		"nearz" : 0.0099999997764825821,
+		"orthogonalprojection" : 
+		{
+			"height" : 1080,
+			"width" : 1920
+		},
+		"skylightcolor" : "0.300 0.300 0.300"
+	},
+	"objects" : 
+	[
+		{
+			"angles" : "0.000 0.000 0.000",
+			"colorBlendMode" : 0,
+			"copybackground" : true,
+			"id" : 99,
+			"image" : "models/background.json",
+			"ledsource" : false,
+			"locktransforms" : false,
+			"name" : "Image Layer",
+			"origin" : "960.000 540.000 0.000",
+			"parallaxDepth" : "1.000 1.000",
+			"perspective" : false,
+			"scale" : 
+			{
+				"script" : "'use strict';\n\nconst Smooth = 25;\nconst Freq = 3;\nconst GrowScale = 0.025;\nconst MinScale = 1.0;\nconst Multiplier = 2.0;\n\nlet Audio = engine.registerAudioBuffers(32);\nlet ScaleOriginal;\n\nexport function update() {\n\n\t// this is a rough attempt to make a curve that goes up then balances then spikes at the end.\n\t// i've not actually graphed it to know if it looks like that but it seems to respond like it.\n\t// imho it responds nicely if you want beat reaction but also some general reaction.\n\t// let Value = (Math.pow((Math.log1p(Audio.average[Freq]) * 0.025) + 1.0,3));\n\n\t// this version reacts more to louder sounds only but also louder sounds but it is also more all or nothingish.\n\t// let Value = Math.min(1.0,(Math.pow((Math.log1p(Audio.average[Freq]) * 0.025) + 1.0,3) - 0.75)) * 4;\n\n\t// this is an attempt to ramp up based on the loudness to avoid quiet jitters.\n\t// this curve seems to really demand beat level loudness if the frequency is in the right range. adjusting Multiplier\n\t// higher will demand louder loudness. i like a default of 2.\n\tlet Value = ((Math.pow(((Audio.average[Freq]*GrowScale)+MinScale),Multiplier))/Multiplier)+((1.0/Multiplier)*(Multiplier-1.0));\n\n\n\tshared.AudioLevel = ((Value - 1) / GrowScale);\n\treturn ScaleOriginal.multiply(Value);\n}\n\nexport function init(Value) {\n\tshared.AudioLevel = 0.0;\n\tScaleOriginal = Value;\n}\n",
+				"value" : "1.0 1.0 1.0"
+			},
+			"size" : "1920.000 1080.000",
+			"solid" : true,
+			"visible" : true
+		},
+		{
+			"angles" : "0.000 0.000 0.000",
+			"colorBlendMode" : 0,
+			"config" : 
+			{
+				"passthrough" : true
+			},
+			"copybackground" : true,
+			"effects" : 
+			[
+				{
+					"file" : "effects/tint/effect.json",
+					"id" : 76,
+					"name" : "",
+					"passes" : 
+					[
+						{
+							"combos" : 
+							{
+								"BLENDMODE" : 0
+							},
+							"constantshadervalues" : 
+							{
+								"alpha" : 1,
+								"color" : 
+								{
+									"script" : "'use strict';\n\nlet Original;\n\nexport function update(Value) {\n\n\treturn Original.multiply(shared.AudioLevel);\n}\n\nexport function init(Value) {\n\tlet LED = engine.userProperties.leds;\n\n\n\tOriginal = (LED.x === 0 && LED.y === 0 && LED.z === 0)?\n\t\t(thisScene.clearcolor):\n\t\t(LED);\n\n\tconsole.log(LED.x);\n\tshared.AudioLevel = 0;\n\treturn;\n}\n\nexport function applyUserProperties(Props) {\n\n\tif(Props.leds !== 'undefined') {\n\t\tOriginal = (Props.leds.x === 0 && Props.leds.y === 0 && Props.leds.z === 0)?\n\t\t\t(thisScene.clearcolor):\n\t\t\t(Props.leds);\n\t}\n\n\treturn;\n}\n",
+									"user" : "leds",
+									"value" : "1 0 0"
+								}
+							},
+							"id" : 77
+						}
+					],
+					"visible" : true
+				}
+			],
+			"id" : 73,
+			"image" : "models/util/composelayer.json",
+			"ledsource" : true,
+			"locktransforms" : false,
+			"name" : "LED Colour Layer",
+			"origin" : "960.000 540.000 0.000",
+			"parallaxDepth" : "1.000 1.000",
+			"perspective" : false,
+			"scale" : "1.000 1.000 1.000",
+			"size" : "1920.000 1080.000",
+			"solid" : true,
+			"visible" : false
+		},
+		{
+			"colorBlendMode" : 0,
+			"copybackground" : true,
+			"effects" : 
+			[
+				{
+					"file" : "effects/motionblur/effect.json",
+					"id" : 109,
+					"name" : "",
+					"passes" : 
+					[
+						{
+							"constantshadervalues" : 
+							{
+								"rate" : 0.20000000000000001
+							},
+							"id" : 110,
+							"textures" : [ null, "_rt_FullCompoBuffer1_fullscreen_109" ]
+						},
+						{
+							"id" : 16
+						}
+					],
+					"visible" : true
+				}
+			],
+			"id" : 106,
+			"image" : "models/util/fullscreenlayer.json",
+			"ledsource" : false,
+			"locktransforms" : false,
+			"name" : "Motion Blur Layer",
+			"parallaxDepth" : "1.000 1.000",
+			"perspective" : false,
+			"solid" : true,
+			"visible" : true
+		}
+	]
+}

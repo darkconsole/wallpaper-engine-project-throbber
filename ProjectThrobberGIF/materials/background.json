@@ -1,0 +1,16 @@
+{
+	"passes" : 
+	[
+		{
+			"combos" : 
+			{
+				"spritesheet" : 1
+			},
+			"cullmode" : "nocull",
+			"depthtest" : "disabled",
+			"depthwrite" : "disabled",
+			"shader" : "genericimage2",
+			"textures" : [ "background" ]
+		}
+	]
+}
