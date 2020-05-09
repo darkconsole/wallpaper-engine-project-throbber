@@ -40,7 +40,7 @@ Download the zip from Github and copy the two folders, `ProjectThrobberGIF` and 
 
     * Freq (Int, 0 to 31, Default 3) - select which frequency range it responds to. 0 is your must wibble wobble bass and 31 is your most tinny tickity tacks.
 
-    * Multiplier (Float, 0.0 to 10.0, Default 2.0) - the higher this value is, the more of a curve that will be applied to the frequency. The result is that a higher value will dampen the amount of reaction when a sound is quiet and boost it when its loud. Basically, higher will generally catch beats more.
+    * Multiplier (Float, 0.0 to 10.0, Default 3.0) - the higher this value is, the more of a curve that will be applied to the frequency. The result is that a higher value will dampen the amount of reaction when a sound is quiet and boost it when its loud. Basically, higher will generally catch beats more.
 
     * Here is a video where I dick with those settings. https://www.youtube.com/watch?v=c1LCBFTE_WE
 
